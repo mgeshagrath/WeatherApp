@@ -1,0 +1,89 @@
+.search {
+  grid-column: sidebar-start / sidebar-end;
+  padding: 8rem 4.2rem;
+  background-color: var(--blue-1);
+  position: relative;
+
+  &__close {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    color: var(--gray-1);
+    font-size: 2.6rem;
+    background-color: transparent;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    position: absolute;
+    padding-left: 1.5rem;
+  }
+
+  &__input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+
+    padding: 1.5rem;
+    padding-left: 3.5rem;
+    width: 25rem;
+    border: 1px solid var(--gray-2);
+    outline: none;
+    color: var(--gray-1);
+    background-color: var(--blue-1);
+
+    &::placeholder {
+      font-size: 1.6rem;
+      line-height: 1.8rem;
+      font-weight: 500;
+      color: var(--gray-4);
+    }
+  }
+
+  &__btn {
+    font-weight: 600;
+    font-size: 1.6rem;
+    font-family: inherit;
+    line-height: 1.8rem;
+    padding: 1.65rem 2rem;
+    background-color: var(--blue-3);
+    color: var(--gray-1);
+  }
+
+  &__result {
+    width: 100%;
+    padding: 2.3rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // font-family: inherit;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+    color: var(--gray-1);
+    border: 1px solid var(--gray-4);
+    background-color: var(--blue-1);
+    margin: 5rem 0;
+  }
+
+  &__cto {
+  }
+
+  &__text {
+  }
+
+  &__go {
+  }
+}

@@ -1,0 +1,46 @@
+.weather {
+  padding: 2rem;
+  background-color: var(--blue-1);
+  // width: 12rem;
+  height: 17rem;
+
+  text-align: center;
+  line-height: 1.8rem;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    color: var(--gray-1);
+    margin-bottom: 5px;
+  }
+
+  &__img-box {
+    // margin-bottom: auto;
+    // display: flex;
+
+    // justify-content: center;
+    // align-items: center;
+    margin: 0 auto;
+    width: 66px;
+    height: 62px;
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__minmax {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    // align-items: center;
+  }
+
+  &__min {
+    color: var(--gray-1);
+  }
+
+  &__max {
+    color: var(--gray-2);
+  }
+}
