@@ -1,0 +1,44 @@
+.current-weather {
+  position: relative;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    right: -40px;
+    bottom: 0;
+    background-image: url(../assets/Cloud-background.png);
+    background-size: 150%;
+    background-repeat: no-repeat;
+    background-position: 50% 15%;
+    opacity: 0.05;
+  }
+
+  &__img {
+    justify-content: center;
+    margin: 9rem 0;
+  }
+
+  &__number {
+    font-size: 14rem;
+    line-height: 17rem;
+    color: var(--gray-1);
+  }
+
+  &__measure {
+    font-size: 4.8rem;
+    font-weight: 300;
+    line-height: 5.6rem;
+    color: var(--gray-3);
+  }
+
+  &__type {
+    margin: 9rem 0;
+    font-size: 3.6rem;
+    font-weight: 600;
+    line-height: 4.2rem;
+    color: var(--gray-2);
+  }
+}

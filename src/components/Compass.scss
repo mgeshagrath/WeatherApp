@@ -1,0 +1,19 @@
+.compass {
+  align-items: center;
+  justify-content: center;
+  &__navigator {
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: var(--gray-4);
+  }
+
+  &__measure {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: var(--gray-1);
+  }
+}

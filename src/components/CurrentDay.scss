@@ -1,0 +1,14 @@
+.current-day {
+  grid-template-columns: repeat(auto-fill, minmax(33rem, 1fr));
+  gap: 5rem;
+  margin-top: 6rem;
+
+  &__title {
+    grid-column: 1 / -1;
+    margin-bottom: 3.5rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2.8rem;
+    color: var(--gray-1);
+  }
+}

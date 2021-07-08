@@ -1,0 +1,25 @@
+.current-location {
+  &__date,
+  &__location {
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+    color: var(--gray-3);
+  }
+
+  &__date {
+    & > *:not(:last-child) {
+      margin-right: 1.6rem;
+    }
+  }
+
+  &__location {
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    font-weight: 600;
+
+    :last-child {
+      margin-left: 8px;
+    }
+  }
+}

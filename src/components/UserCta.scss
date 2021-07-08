@@ -1,0 +1,19 @@
+.user-cta {
+  justify-content: space-between;
+
+  &__search-btn,
+  &__location-btn {
+    background-color: var(--gray-6);
+    color: var(--gray-1);
+  }
+
+  &__search-btn {
+    padding: 1rem 1.7rem;
+  }
+
+  &__location-btn {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+  }
+}
