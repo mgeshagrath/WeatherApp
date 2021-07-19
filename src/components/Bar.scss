@@ -1,5 +1,6 @@
 .bar {
   flex-direction: column;
+  color: var(--gray-2);
 
   &__information {
     justify-content: space-between;
@@ -7,7 +8,6 @@
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.4rem;
-    color: var(--gray-2);
   }
 
   &__full {

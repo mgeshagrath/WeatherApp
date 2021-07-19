@@ -36,10 +36,11 @@ export const LocationIcon = () => {
   );
 };
 
-export const NaviIcon = () => {
+export const NaviIcon = ({ transform }) => {
   return (
     <svg
       className="navi"
+      style={{ transform: `rotate(${transform}deg)` }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >

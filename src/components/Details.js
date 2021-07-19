@@ -4,20 +4,19 @@ import './Details.scss';
 import Card from './ui/Card';
 import Bar from './Bar';
 import Compass from './Compass';
+import ValueType from './ValueType';
 
-const Details = ({ type }) => {
-  const markup = type === 'bar' ? <Bar /> : <Compass />;
-
+const Details = ({ type, data }) => {
   return (
     <Card className="details">
       <Heading type="h4" className="details__title">
-        Wind status
+        {type}
       </Heading>
       <Heading type="h3" className="details__content">
-        <span className="details__number">7 </span>
-        <span className="details__measure">mph</span>
+        <ValueType type={type} data={data} />
       </Heading>
-      {type && markup}
+      {type === 'Wind Status' && <Compass data={data} />}
+      {type === 'Humidity' && <Bar data={data} />}
     </Card>
   );
 };
