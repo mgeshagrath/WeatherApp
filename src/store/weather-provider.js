@@ -5,13 +5,16 @@ const INITIAL_STATE = {
   location: { city: '', country: '', language: '' },
   currentWeather: {},
   nextWeather: [],
-  latlong: {},
+  geo: {},
+  // isLoading: false,
+  // hasError: false,
+  // allowed: false
 };
 
 const reducer = (state, action) => {
-  const { data } = action;
+  const { data, type } = action;
 
-  if (action.type === 'GET') {
+  if (type === 'GET') {
     return {
       ...state,
       location: data.userData,
@@ -20,21 +23,36 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === 'GEO') {
+  if (type === 'GEO') {
+    // const { lat, long, error } = data;
+
+    // console.log(data);
     return {
       ...state,
-      latlong: data,
+      geo: data,
+      // latlong: { lat, long },
+      // error,
     };
   }
+
+  // if (type === 'ERROR') {
+  //   return {
+  //     ...state,
+  //     hasError: { hasError: data.hasError, error: data.error },
+  //   };
+  // }
+
+  // if (type === 'LOADING') {
+  //   return {
+  //     ...state,
+  //     isLoading: !state.isLoading,
+  //   };
+  // }
 };
 
 const WeatherProvider = ({ children }) => {
   const [userWeather, dispatch] = useReducer(reducer, INITIAL_STATE);
-
-  // navigator.geolocation.getCurrentPosition(position => ({
-  //   lat: position.coords.latitude,
-  //   long: position.coords.longitude,
-  // }));
+  const { geo } = userWeather;
 
   const getUserWeatherHandler = (userData, weatherData) => {
     dispatch({
@@ -43,12 +61,58 @@ const WeatherProvider = ({ children }) => {
     });
   };
 
-  const getGeolocationHandler = latlong => {
+  const getGeolocationHandler = geoData => {
     dispatch({
       type: 'GEO',
-      data: latlong,
+      data: geoData,
     });
   };
+
+  if (Object.keys(geo).length === 0 && !geo.error) {
+    navigator.geolocation.getCurrentPosition(
+      position =>
+        getGeolocationHandler({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+          error: null,
+        }),
+      error =>
+        getGeolocationHandler({
+          lat: null,
+          long: null,
+          error: error.message,
+        })
+    );
+  }
+
+  // const setGeolocationErrorHandler = error => {
+  //   dispatch({
+  //     type: 'GEOERROR',
+  //     data: error,
+  //   });
+  // };
+
+  // const errorHandler = errorData => {
+  //   dispatch({
+  //     type: 'ERROR',
+  //     data: errorData,
+  //   });
+  // };
+
+  // const loadingHandler = loadingData => {
+  //   dispatch({
+  //     type: 'LOADING',
+  //     data: loadingData,
+  //   });
+  // };
+
+  // navigator.geolocation.getCurrentPosition(position =>
+  //   getGeolocationHandler({
+  //     lat: position.coords.latitude,
+  //     long: position.coords.longitude,
+  //     allowed: true,
+  //   })
+  // );
 
   return (
     <context.Provider
@@ -56,6 +120,9 @@ const WeatherProvider = ({ children }) => {
         data: userWeather,
         getUserWeather: getUserWeatherHandler,
         getGeolocation: getGeolocationHandler,
+        // setGeolocationError: setGeolocationErrorHandler,
+        // setError: errorHandler,
+        // setLoading: loadingHandler,
       }}
     >
       {children}
