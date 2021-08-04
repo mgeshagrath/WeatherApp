@@ -45,6 +45,7 @@
 - [ ] Transform temp between °C and °F
 - [ ] Light mode
 - [ ] Get user location through button
+- [ ] Error handler
 - [x] Display next five days
 - [x] Responsive
 
