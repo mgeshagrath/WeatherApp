@@ -41,7 +41,7 @@
 ## Features
 
 - [x] Fetch data from user location
-- [ ] Fetch data from a search bar
+- [ ] Fetch data from search bar
 - [ ] Transform temp between °C and °F
 - [ ] Light mode
 - [ ] Get user location through button
