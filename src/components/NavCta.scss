@@ -1,0 +1,36 @@
+.nav-cta {
+  justify-content: space-between;
+  transform: translateY(-10rem);
+  width: 80%;
+  margin: 0 auto;
+  // transition: all 0.2s;
+
+  &__wrapper {
+    & > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+  &__rounded {
+    width: 4rem;
+    height: 4rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-radius: 50%;
+    background-color: var(--gray-5);
+    color: var(--gray-1);
+    backface-visibility: hidden;
+    transition: all 0.2s;
+  }
+
+  .checked {
+    // width: 2.5rem;
+    // height: 2.5rem;
+    // font-size: 1.5rem;
+    background-color: var(--gray-1);
+    color: var(--blue-4);
+    // transform: translateY(1px);
+    // 0 2px 10px rgb(134 181 212 / 71%)
+    cursor: not-allowed;
+    // box-shadow: 0 0 5px #666;
+  }
+}

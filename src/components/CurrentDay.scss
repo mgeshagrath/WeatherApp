@@ -2,6 +2,7 @@
   grid-template-columns: repeat(auto-fill, minmax(33rem, 1fr));
   gap: 5rem;
   margin-top: 6rem;
+  animation: slow-in 2s;
 
   @media only screen and (max-width: 400px) {
     grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
@@ -14,5 +15,18 @@
     font-weight: 700;
     line-height: 2.8rem;
     color: var(--gray-1);
+  }
+}
+
+@keyframes slow-in {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20em);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

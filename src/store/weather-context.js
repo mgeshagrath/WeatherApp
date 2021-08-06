@@ -5,11 +5,17 @@ export const context = createContext({
   currentWeather: [],
   nextWeather: [],
   geo: {},
+  measurement: '°C',
+  theme: 'N',
   // geoError: '',
   // hasError: {},
   // isLoading: false,
   getGeolocation: (lat, long) => {},
   getUserWeather: weather => {},
+  gradesFar: () => {},
+  gradesCer: () => {},
+  setTheme: () => {}
+
   // setGeolocationError: error => {},
   // setError: errorData => {},
   // setLoading: loadingData => {},

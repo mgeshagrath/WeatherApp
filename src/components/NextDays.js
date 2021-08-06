@@ -3,9 +3,14 @@ import Weather from './Weather';
 
 import './NextDays.scss';
 
-const NextDays = ({ data }) => {
-  const nextDaysMarkup = data.map(day => (
-    <Weather key={Math.random()} data={day} />
+const NextDays = ({ data, measure }) => {
+  const nextDaysMarkup = data.map((day, i) => (
+    <Weather
+      key={Math.random()}
+      data={day}
+      className={`weather--${i}`}
+      measure={measure}
+    />
   ));
   return <Grid className="next-days">{nextDaysMarkup}</Grid>;
 };

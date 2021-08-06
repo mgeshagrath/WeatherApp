@@ -13,6 +13,8 @@ const App = () => {
   const { geo } = data;
   const { error } = geo;
 
+  console.log(geo);
+
   useEffect(() => {
     const weatherCall = async () => {
       setIsLoading(true);

@@ -9,13 +9,13 @@ import { context } from '../../store/weather-context';
 
 const Sidebar = () => {
   const { data } = useContext(context);
-  const { location, currentWeather } = data;
+  const { location, currentWeather, measurement } = data;
   const { temp, type, date } = currentWeather;
 
   return (
     <Card className="sidebar">
       <UserCta />
-      <CurrentWeather data={{ temp, type }} />
+      <CurrentWeather data={{ temp, type, measurement }} />
       <CurrentLocation data={{ location, date }} />
     </Card>
   );
