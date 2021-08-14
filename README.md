@@ -29,7 +29,7 @@
 
 ## Overview
 
-![screenshot](https://i.imgur.com/kSQiCHS.png)
+![screenshot](https://i.imgur.com/az6vgZC.png)
 
 ### Built With
 
@@ -42,9 +42,9 @@
 
 - [x] Fetch data from user location
 - [ ] Fetch data from search bar
-- [ ] Transform temp between °C and °F
-- [ ] Light mode
-- [ ] Get user location through button
+- [x] Transform temp between °C and °F
+- [x] Light mode and night mode
+- [x] Get user location through button
 - [ ] Error handler
 - [x] Display next five days
 - [x] Responsive
