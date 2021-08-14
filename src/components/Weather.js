@@ -1,11 +1,8 @@
-import Heading from './ui/Heading';
 import Card from '../components/ui/Card';
-import './Weather.scss';
-import Flex from './ui/Flex';
+import Heading from './ui/Heading';
 import getImgByKey from './ui/imgs/imgs';
-import { useContext } from 'react';
-import { context } from '../store/weather-context';
-import { toGradesCel, toGradesFar } from '../utility';
+import { toGradesFar } from '../utility';
+import './Weather.scss';
 
 const Weather = ({ data, className, measure }) => {
   const { minTemp, maxTemp, type, date } = data;
@@ -13,33 +10,22 @@ const Weather = ({ data, className, measure }) => {
   const min = measure === '°F' ? toGradesFar(minTemp) : minTemp;
   const max = measure === '°F' ? toGradesFar(maxTemp) : maxTemp;
 
-  // let min, max;
-
-  // if (measure === 'F') {
-  //   min = toGradesFar(minTemp);
-  //   max = toGradesFar(maxTemp);
-  // }
-
   return (
-    <Card className={`weather ${className}`}>
+    <Card className={`card weather ${className}`}>
       <Heading type="h4" className="weather__title">
         {date}
       </Heading>
       <div className="weather__img-box">
-        <img
-          src={getImgByKey(weatherImg)}
-          alt={type}
-          className="weather__img"
-        />
+        <img src={getImgByKey(weatherImg)} alt={type} className="weather__img" />
       </div>
-      <Flex className="weather__minmax">
+      <Card className="flex weather__minmax">
         <span className="weather__min">
           {min} {measure}
         </span>
         <span className="weather__max">
           {max} {measure}
         </span>
-      </Flex>
+      </Card>
     </Card>
   );
 };

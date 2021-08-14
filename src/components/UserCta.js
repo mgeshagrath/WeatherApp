@@ -1,26 +1,21 @@
-import './UserCta.scss';
-import Flex from './ui/Flex';
-import Button from './ui/Button';
-import { GpsIcon } from './ui/icons/Icons';
 import { useContext } from 'react';
 import { context } from '../store/weather-context';
+import { GpsIcon } from './ui/icons/Icons';
+import Button from './ui/Button';
+import Card from './ui/Card';
+import './UserCta.scss';
 
 const UserCta = () => {
-  const { gradesFar, gradesCer, getGeolocation, data } = useContext(context);
+  const { getGeolocation, data } = useContext(context);
   const { geo } = data;
 
-  const toggleHandler = () => getGeolocation(geo);
-
-  // console.log(geo);
-
   return (
-    <Flex className="user-cta">
+    <Card className="flex user-cta">
       <Button className="user-cta__search-btn">Search for places</Button>
-
-      <Button onClick={toggleHandler} className="user-cta__location-btn">
+      <Button onClick={() => getGeolocation(geo)} className="user-cta__location-btn">
         <GpsIcon />
       </Button>
-    </Flex>
+    </Card>
   );
 };
 

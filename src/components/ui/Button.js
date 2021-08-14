@@ -1,13 +1,8 @@
-import './Button.scss';
+import './UiStyles.scss';
 
 const Button = ({ className, children, onClick, type, disabled }) => {
   return (
-    <button
-      className={`btn ${className}`}
-      onClick={onClick}
-      type={type}
-      disabled={disabled}
-    >
+    <button className={`btn ${className}`} onClick={onClick} type={type} disabled={disabled}>
       {children}
     </button>
   );

@@ -56,7 +56,7 @@ const reducer = (state, action) => {
     if (state.theme === 'N') {
       Array(6)
         .fill()
-        .map((value, i) => setCssProperty(`--gray-${i + 1}`, '#fff'));
+        .map((_, i) => setCssProperty(`--gray-${i + 1}`, '#fff'));
       setCssProperty('--gray-5', '#00aae4');
       setCssProperty('--blue-1', '#00aae4');
       setCssProperty('--blue-2', '#92cfe6');

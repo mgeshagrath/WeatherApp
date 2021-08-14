@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
-import './CurrentLocation.scss';
-import Flex from './ui/Flex';
 import { LocationIcon } from './ui/icons/Icons';
+import Card from './ui/Card';
+import './CurrentLocation.scss';
 
 const CurrentLocation = ({ data }) => {
   const { location, date } = data;
@@ -12,13 +12,12 @@ const CurrentLocation = ({ data }) => {
       <div className="current-location__date">
         <span>Today</span>
         <span>-</span>
-        {/* <span>Fri, 5 Jun</span> */}
         <span>{date}</span>
       </div>
-      <Flex className="current-location__location">
+      <Card className="flex current-location__location">
         <LocationIcon />
         <span>{`${city}, ${country}`}</span>
-      </Flex>
+      </Card>
     </Fragment>
   );
 };

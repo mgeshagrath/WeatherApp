@@ -19,11 +19,23 @@
 .navi {
   width: 1.5rem;
   height: 1.5rem;
-  fill: var(--gray-1);
+  fill: var(--special);
 }
 
 .search-icon {
   width: 3rem;
   height: 2.5rem;
   fill: var(--gray-4);
+}
+
+.light-icon {
+  width: 3rem;
+  height: 3rem;
+  fill: var(--yellow);
+}
+
+.night-icon {
+  width: 3rem;
+  height: 3rem;
+  fill: var(--special);
 }

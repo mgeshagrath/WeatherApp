@@ -1,0 +1,78 @@
+.card {
+  padding: 2rem;
+  background-color: var(--blue-1);
+  border-radius: 24px;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.btn {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+.modal {
+  width: 50rem;
+  height: 25rem;
+  grid-column: sidebar-start / content-end;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media only screen and (max-width: 400px) {
+    width: 35rem;
+  }
+
+  &__paragraph {
+    color: var(--gray-1);
+    font-size: 3rem;
+    margin-top: 3rem;
+    text-align: center;
+
+    @media only screen and (max-width: 400px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+
+  &::after {
+    content: '';
+    width: 5rem;
+    height: 5rem;
+    border: 10px solid var(--gray-2);
+    border-top-color: var(--blue-3);
+    border-radius: 50%;
+    animation: spin 1s ease infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

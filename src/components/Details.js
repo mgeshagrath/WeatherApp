@@ -1,14 +1,13 @@
-import Heading from './ui/Heading';
-
-import './Details.scss';
 import Card from './ui/Card';
+import Heading from './ui/Heading';
 import Bar from './Bar';
 import Compass from './Compass';
 import ValueType from './ValueType';
+import './Details.scss';
 
 const Details = ({ type, data }) => {
   return (
-    <Card className="details">
+    <Card className="card details">
       <Heading type="h4" className="details__title">
         {type}
       </Heading>

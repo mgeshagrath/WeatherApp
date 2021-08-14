@@ -1,19 +1,15 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
-import './App.scss';
-
+import { context } from './store/weather-context';
 import Content from './components/content/Content';
-
 import Sidebar from './components/content/Sidebar';
 import Modal from './components/ui/Modal';
-import { context } from './store/weather-context';
+import './App.scss';
 
 const App = () => {
   const { data, getUserWeather } = useContext(context);
   const [isLoading, setIsLoading] = useState(false);
   const { geo } = data;
   const { error } = geo;
-
-  console.log(geo);
 
   useEffect(() => {
     const weatherCall = async () => {
@@ -76,24 +72,12 @@ const App = () => {
         setIsLoading(false);
       }
     };
-
     weatherCall();
   }, [geo]);
 
-  // if (!allowed) return <Modal data="Please, enable your location!" />;
-
   if (isLoading) return <Modal data="Retrieving your data <3" />;
-  if (!isLoading && error)
-    return <Modal data="Please, enable your location :c" />;
-  if (Object.keys(geo).length === 0)
-    return <Modal data="Waiting for your location :)" />;
-
-  // if (Object.keys(latlong).length === 0 && hasError) {
-  //   errorHandler({
-  //     hasError: true,
-  //     error: error.message,
-  //   });
-  // }
+  if (!isLoading && error) return <Modal data="Please, enable your location :c" />;
+  if (Object.keys(geo).length === 0) return <Modal data="Waiting for your location :)" />;
 
   return (
     <Fragment>

@@ -1,63 +1,51 @@
-import Button from './ui/Button';
-import Flex from './ui/Flex';
-import './NavCta.scss';
 import { useContext } from 'react';
 import { context } from '../store/weather-context';
+import { LightIcon, NightIcon } from './ui/icons/Icons';
+import Button from './ui/Button';
+import Card from './ui/Card';
+import './NavCta.scss';
 
-const checkCurrentSelection = (value, condition) =>
-  value === condition ? 'checked' : '';
+const checkCurrentSelection = (value, condition) => (value === condition ? 'checked' : 'unchecked');
 
 const NavCta = () => {
   const { gradesFar, gradesCer, setTheme, data } = useContext(context);
   const { measurement, theme } = data;
 
-  console.log(theme);
-
-  // console.log(measurement);
-
-  // console.log(checkCurrentSelection(measurement, '°C'));
-
   return (
-    <Flex className="nav-cta">
-      <Flex className="nav-cta__wrapper">
+    <Card className="flex nav-cta">
+      <Card className="flex nav-cta__wrapper">
         <Button
-          className={`nav-cta__rounded ${checkCurrentSelection(
-            measurement,
-            '°C'
-          )}`}
-          onClick={() => gradesCer()}
+          className={`nav-cta__rounded ${checkCurrentSelection(measurement, '°C')}`}
+          onClick={gradesCer}
           disabled={measurement === '°C'}
         >
           °C
         </Button>
         <Button
-          className={`nav-cta__rounded ${checkCurrentSelection(
-            measurement,
-            '°F'
-          )}`}
-          onClick={() => gradesFar()}
+          className={`nav-cta__rounded ${checkCurrentSelection(measurement, '°F')}`}
+          onClick={gradesFar}
           disabled={measurement === '°F'}
         >
           °F
         </Button>
-      </Flex>
-      <Flex className="nav-cta__wrapper">
+      </Card>
+      <Card className="flex nav-cta__wrapper">
         <Button
           className={`nav-cta__rounded ${checkCurrentSelection(theme, 'L')}`}
-          onClick={() => setTheme()}
+          onClick={setTheme}
           disabled={theme === 'L'}
         >
-          L
+          <LightIcon />
         </Button>
         <Button
           className={`nav-cta__rounded ${checkCurrentSelection(theme, 'N')}`}
-          onClick={() => setTheme()}
+          onClick={setTheme}
           disabled={theme === 'N'}
         >
-          N
+          <NightIcon />
         </Button>
-      </Flex>
-    </Flex>
+      </Card>
+    </Card>
   );
 };
 

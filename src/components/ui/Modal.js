@@ -1,11 +1,11 @@
 import Card from './Card';
-import './Modal.scss';
-import Spinner from './Spinner';
+
+import './UiStyles.scss';
 
 const Modal = ({ data }) => {
   return (
     <Card className="modal">
-      <Spinner />
+      <Card className="spinner" />
       <p className="modal__paragraph">{data}</p>
     </Card>
   );
