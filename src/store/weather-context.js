@@ -7,14 +7,17 @@ export const context = createContext({
   geo: {},
   measurement: '°C',
   theme: 'N',
+  userLocation: {},
   // geoError: '',
   // hasError: {},
   // isLoading: false,
   getGeolocation: (lat, long) => {},
   getUserWeather: weather => {},
-  gradesFar: () => {},
-  gradesCer: () => {},
-  setTheme: () => {}
+  // gradesFar: () => {},
+  // gradesCer: () => {},
+  toggleMeasurement : () =>{},
+  setTheme: () => {},
+  setUserLocation: () => {}
 
   // setGeolocationError: error => {},
   // setError: errorData => {},

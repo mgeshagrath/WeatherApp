@@ -4,12 +4,14 @@ import Content from './components/content/Content';
 import Sidebar from './components/content/Sidebar';
 import Modal from './components/ui/Modal';
 import './App.scss';
+import SearchBar from './components/SearchBar';
 
 const App = () => {
   const { data, getUserWeather } = useContext(context);
   const [isLoading, setIsLoading] = useState(false);
   const { geo } = data;
   const { error } = geo;
+
 
   useEffect(() => {
     const weatherCall = async () => {
@@ -25,9 +27,13 @@ const App = () => {
           `${proxy}https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`
         );
 
+        console.log(lat, long);
+
         if (!response.ok) throw new Error('Error Fetch 1');
 
         const data = await response.json();
+
+        console.log(data);
 
         const { woeid } = data[0];
 
@@ -81,6 +87,7 @@ const App = () => {
 
   return (
     <Fragment>
+    {/* <SearchBar/> */}
       <Sidebar />
       <Content />
     </Fragment>

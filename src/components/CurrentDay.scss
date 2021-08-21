@@ -2,6 +2,7 @@
   grid-template-columns: repeat(auto-fill, minmax(33rem, 1fr));
   gap: 5rem;
   margin-top: 6rem;
+  backface-visibility: hidden;
   animation: slow-in 2s;
 
   @media only screen and (max-width: 400px) {

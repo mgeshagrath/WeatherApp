@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   geo: {},
   measurement: '°C',
   theme: 'N',
+  userLocation: {},
   // isLoading: false,
   // hasError: false,
   // allowed: false
@@ -16,6 +17,8 @@ const INITIAL_STATE = {
 
 const reducer = (state, action) => {
   const { data, type } = action;
+
+
 
   if (type === 'GET') {
     return {
@@ -38,17 +41,41 @@ const reducer = (state, action) => {
     };
   }
 
-  if (type === 'F') {
-    return {
-      ...state,
-      measurement: '°F',
-    };
+  // if (type === 'F') {
+  //   return {
+  //     ...state,
+  //     measurement: '°F',
+  //   };
+  // }
+
+  // if (type === 'C') {
+  //   return {
+  //     ...state,
+  //     measurement: '°C',
+  //   };
+  // }
+
+  if (type === 'MEASU') {
+    if (state.measurement === '°C') {
+      return {
+        ...state,
+        measurement: '°F',
+      };
+    }
+
+    if (state.measurement === '°F') {
+      return {
+        ...state,
+        measurement: '°C',
+      };
+    }
   }
 
-  if (type === 'C') {
+  if (type === 'USER') {
+
     return {
       ...state,
-      measurement: '°C',
+      userLocation: data,
     };
   }
 
@@ -60,7 +87,7 @@ const reducer = (state, action) => {
       setCssProperty('--gray-5', '#00aae4');
       setCssProperty('--blue-1', '#00aae4');
       setCssProperty('--blue-2', '#92cfe6');
-      setCssProperty('--special', '#000');
+      setCssProperty('--special', '#00aae4');
       return {
         ...state,
         theme: 'L',
@@ -124,31 +151,48 @@ const WeatherProvider = ({ children }) => {
     });
   };
 
-  const gradesFarHandler = () => {
+  const toggleMeasurementHandler = () =>
     dispatch({
-      type: 'F',
+      type: 'MEASU',
     });
-  };
 
-  const gradesCerHandler = () => {
-    dispatch({
-      type: 'C',
-    });
-  };
+  // const gradesFarHandler = () => {
+  //   dispatch({
+  //     type: 'F',
+  //   });
+  // };
+
+  // const gradesCerHandler = () => {
+  //   dispatch({
+  //     type: 'C',
+  //   });
+  // };
 
   const setThemeHandler = () =>
     dispatch({
       type: 'THEME',
     });
 
+  const setUserLocationHandler = location =>
+    dispatch({
+      type: 'USER',
+      data: location,
+    });
+
   if (Object.keys(geo).length === 0 && !geo.error) {
     navigator.geolocation.getCurrentPosition(
-      position =>
+      position => {
         getGeolocationHandler({
           lat: position.coords.latitude,
           long: position.coords.longitude,
           error: null,
-        }),
+        });
+        setUserLocationHandler({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        });
+      },
+
       error =>
         getGeolocationHandler({
           lat: null,
@@ -193,8 +237,9 @@ const WeatherProvider = ({ children }) => {
         data: userWeather,
         getUserWeather: getUserWeatherHandler,
         getGeolocation: getGeolocationHandler,
-        gradesFar: gradesFarHandler,
-        gradesCer: gradesCerHandler,
+        // gradesFar: gradesFarHandler,
+        // gradesCer: gradesCerHandler,
+        toggleMeasurement: toggleMeasurementHandler,
         setTheme: setThemeHandler,
         // setGeolocationError: setGeolocationErrorHandler,
         // setError: errorHandler,

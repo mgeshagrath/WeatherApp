@@ -5,15 +5,19 @@ import Button from './ui/Button';
 import Card from './ui/Card';
 import './NavCta.scss';
 
-const checkCurrentSelection = (value, condition) => (value === condition ? 'checked' : 'unchecked');
+const checkCurrentSelection = (value, condition) => (value === condition ? 'left' : 'right');
 
 const NavCta = () => {
-  const { gradesFar, gradesCer, setTheme, data } = useContext(context);
+  const { toggleMeasurement, setTheme, data } = useContext(context);
   const { measurement, theme } = data;
+  // console.log(theme);
+  console.log(checkCurrentSelection(theme, 'N'));
+
+  console.log(measurement);
 
   return (
     <Card className="flex nav-cta">
-      <Card className="flex nav-cta__wrapper">
+      {/* <Card className="flex nav-cta__wrapper">
         <Button
           className={`nav-cta__rounded ${checkCurrentSelection(measurement, '°C')}`}
           onClick={gradesCer}
@@ -28,23 +32,24 @@ const NavCta = () => {
         >
           °F
         </Button>
-      </Card>
-      <Card className="flex nav-cta__wrapper">
-        <Button
-          className={`nav-cta__rounded ${checkCurrentSelection(theme, 'L')}`}
-          onClick={setTheme}
-          disabled={theme === 'L'}
+      </Card> */}
+
+      <Button className="nav-cta__wrapper" onClick={toggleMeasurement}>
+        <span
+          className={`nav-cta__rounded ${checkCurrentSelection(measurement, '°C')}`}
         >
-          <LightIcon />
-        </Button>
-        <Button
+          {measurement === '°C' ? '°C' : '°F'}
+        </span>
+      </Button>
+
+
+      <Button className="nav-cta__wrapper" onClick={setTheme}>
+        <span
           className={`nav-cta__rounded ${checkCurrentSelection(theme, 'N')}`}
-          onClick={setTheme}
-          disabled={theme === 'N'}
         >
-          <NightIcon />
-        </Button>
-      </Card>
+          {theme === 'N' ? <NightIcon /> : <LightIcon />}
+        </span>
+      </Button>
     </Card>
   );
 };
