@@ -8,8 +8,8 @@ import './NavCta.scss';
 const checkCurrentSelection = (value, condition) => (value === condition ? 'left' : 'right');
 
 const NavCta = () => {
-  const { toggleMeasurement, setTheme, data } = useContext(context);
-  const { measurement, theme } = data;
+  const { toggleMeasurement, setTheme, measurement, theme } = useContext(context);
+  // const { measurement, theme } = data;
   // console.log(theme);
   console.log(checkCurrentSelection(theme, 'N'));
 
@@ -36,16 +36,25 @@ const NavCta = () => {
 
       <Button className="nav-cta__wrapper" onClick={toggleMeasurement}>
         <span
-          className={`nav-cta__rounded ${checkCurrentSelection(measurement, '°C')}`}
+          style={{
+            marginLeft: measurement === '°F' ? 'auto' : 'unset',
+            marginRight: measurement === '°C' ? 'auto' : 'unset',
+          }}
+          className={`nav-cta__rounded`}
+          // className={`nav-cta__rounded ${checkCurrentSelection(measurement, '°C')}`}
         >
           {measurement === '°C' ? '°C' : '°F'}
         </span>
       </Button>
 
-
       <Button className="nav-cta__wrapper" onClick={setTheme}>
         <span
-          className={`nav-cta__rounded ${checkCurrentSelection(theme, 'N')}`}
+          style={{
+            marginLeft: theme === 'L' ? 'auto' : 'unset',
+            marginRight: theme === 'N' ? 'auto' : 'unset',
+          }}
+          className={`nav-cta__rounded`}
+          // className={`nav-cta__rounded ${checkCurrentSelection(theme, 'N')}`}
         >
           {theme === 'N' ? <NightIcon /> : <LightIcon />}
         </span>

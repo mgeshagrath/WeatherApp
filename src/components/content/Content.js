@@ -7,8 +7,8 @@ import CurrentDay from '../CurrentDay';
 import './Content.scss';
 
 const Content = () => {
-  const { data } = useContext(context);
-  const { currentWeather, nextWeather, measurement } = data;
+  const { currentWeather, nextWeather, measurement } = useContext(context);
+  // const { currentWeather, nextWeather, measurement } = data;
 
   return (
     <Card className="card content">

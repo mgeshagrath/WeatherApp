@@ -4,3 +4,7 @@ export const toGradesCel = grades => (grades - 32) * (5 / 9);
 
 export const setCssProperty = (vary, value) =>
   document.documentElement.style.setProperty(`${vary}`, `${value}`);
+
+export const WEATHER_API = 'https://www.metaweather.com/api/';
+
+export const PROXY = 'https://api.allorigins.win/raw?url=';

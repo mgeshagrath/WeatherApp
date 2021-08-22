@@ -3,13 +3,13 @@ import { context } from './store/weather-context';
 import Content from './components/content/Content';
 import Sidebar from './components/content/Sidebar';
 import Modal from './components/ui/Modal';
-import './App.scss';
+// import './App.scss';
 import SearchBar from './components/SearchBar';
 
 const App = () => {
-  const { data, getUserWeather } = useContext(context);
+  const { geo, getUserWeather } = useContext(context);
   const [isLoading, setIsLoading] = useState(false);
-  const { geo } = data;
+  // const { geo } = data;
   const { error } = geo;
 
 

@@ -4,7 +4,7 @@ import Button from './ui/Button';
 import { ArrowIcon } from './ui/icons/Icons';
 
 const SearchResults = ({ data }) => {
-  const { getGeolocation, geo } = useContext(context);
+  const { getGeolocation } = useContext(context);
   const { title, latt_long } = data;
 
   // console.log(latt_long);

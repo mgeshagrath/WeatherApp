@@ -1,98 +1,46 @@
+import { Fragment, useState } from 'react';
+import { useHttp } from '../hooks/useHttp';
 import { SearchIcon } from './ui/icons/Icons';
-import { ArrowIcon } from './ui/icons/Icons';
 import Button from './ui/Button';
 import Card from './ui/Card';
-import './SearchBar.scss';
-import { Fragment, useEffect, useState } from 'react';
 import SearchResults from './SearchResults';
-// className="card search"
+import './SearchBar.scss';
+
 const SearchBar = ({ onSearch }) => {
   const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState([]);
-  const [resultsError, setResultsError] = useState(false)
-
-  const searchRequests = async query => {
-    setIsLoading(true);
-    try {
-      const proxy = 'https://api.allorigins.win/raw?url=';
-
-      const response = await fetch(
-        `${proxy}https://www.metaweather.com/api/location/search/?query=${query}`
-      );
-      const data = await response.json();
-
-      if(data.length === 0) {
-        setResultsError(true)
-        return
-      }
-
-      setResults(data);
-      setResultsError(false)
-    } catch (err) {
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // useEffect(() => {
-  //   // const proxy = 'https://api.allorigins.win/raw?url=';
-
-  //   // if (!lat && !long) return;
-
-  //   // const response = await fetch(
-  //   //   `${proxy}https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`
-  //   // );
-
-  //   // if (!response.ok) throw new Error('Error Fetch 1');
-
-  //   const searchRequests = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const proxy = 'https://api.allorigins.win/raw?url=';
-
-  //       const response = await fetch(
-  //         `${proxy}https://www.metaweather.com/api/location/search/?query=${query}`
-  //       );
-  //       const data = await response.json();
-
-  //       console.log(data);
-  //     } catch (err) {
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   searchRequests();
-  // }, [query]);
+  const [query, setQuery] = useState('');
+  const [displayedError, setDisplayedError] = useState('');
+  const { loading, error, dataFetched } = useHttp(`location/search/?query=`, query);
 
   const onSubmitHandler = e => {
     e.preventDefault();
 
     if (!inputValue.trim()) {
-      setError('Query must not be empty!');
+      setDisplayedError('Query must not be empty!');
       return;
     }
 
     if (inputValue.length < 3) {
-      setError('Try something more specific!');
+      setDisplayedError('Try something more specific!');
       return;
     }
-
-    // /\d/.test(inputValue) ||
     // eslint-disable-next-line
     if (/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\d]/.test(inputValue)) {
-      setError('Query must be only letters!');
+      setDisplayedError('Query must be only letters!');
       return;
     }
 
-    searchRequests(inputValue.trim());
+    setQuery(inputValue.trim());
     setInputValue('');
-    setError('');
+    setDisplayedError('');
   };
 
-  // console.log(inputValue);
+  const dataMarkup =
+    !error && dataFetched ? (
+      dataFetched.map(result => <SearchResults key={Math.random()} data={result} />)
+    ) : (
+      <p className="search__error">{error}</p>
+    );
 
   return (
     <Fragment>
@@ -114,22 +62,10 @@ const SearchBar = ({ onSearch }) => {
           Search
         </Button>
       </form>
-
-      {error && <p className="search__error">{error}</p>}
-      {/* <Button className="search__result">
-        <span className="search__text">Result 1</span>
-        <ArrowIcon className="search__arrow-icon" />
-      </Button> */}
-      <Card className={`search__results ${isLoading || resultsError ? 'center' : ''}`}>
-        {results.length !== 0 &&
-          !isLoading &&
-          results.map(result => <SearchResults key={Math.random()} data={result} />)}
-        {isLoading && <Card className="spinner" />}
-        {!isLoading && resultsError && (
-          <p className="search__error">
-            Looks like everything it's working, but we could not find anything, maybe too specific?
-          </p>
-        )}
+      {displayedError && <p className="search__error">{displayedError}</p>}
+      <Card className="search__results">
+        {loading && <Card className="spinner" />}
+        {!loading && dataMarkup}
       </Card>
     </Fragment>
   );

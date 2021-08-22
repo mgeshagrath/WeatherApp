@@ -37,7 +37,7 @@ html {
 
 #root {
   display: grid;
-  grid-template-columns: [sidebar-start] 1fr [sidebar-end content-start] 2fr [content-end];
+  grid-template-columns: [sidebar-start] 1fr[sidebar-end content-start] 2fr [content-end];
   max-width: 1440px;
   min-height: 100vh;
   margin: 0 auto;

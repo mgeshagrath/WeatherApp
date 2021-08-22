@@ -18,8 +18,6 @@ const INITIAL_STATE = {
 const reducer = (state, action) => {
   const { data, type } = action;
 
-
-
   if (type === 'GET') {
     return {
       ...state,
@@ -72,7 +70,6 @@ const reducer = (state, action) => {
   }
 
   if (type === 'USER') {
-
     return {
       ...state,
       userLocation: data,
@@ -135,7 +132,8 @@ const reducer = (state, action) => {
 
 const WeatherProvider = ({ children }) => {
   const [userWeather, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const { geo } = userWeather;
+  const { geo, location, currentWeather, nextWeather, measurement, theme, userLocation } =
+    userWeather;
 
   const getUserWeatherHandler = (userData, weatherData) => {
     dispatch({
@@ -234,7 +232,13 @@ const WeatherProvider = ({ children }) => {
   return (
     <context.Provider
       value={{
-        data: userWeather,
+        geo,
+        location,
+        currentWeather,
+        nextWeather,
+        measurement,
+        theme,
+        userLocation,
         getUserWeather: getUserWeatherHandler,
         getGeolocation: getGeolocationHandler,
         // gradesFar: gradesFarHandler,

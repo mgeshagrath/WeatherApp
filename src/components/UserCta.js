@@ -6,8 +6,8 @@ import Card from './ui/Card';
 import './UserCta.scss';
 
 const UserCta = ({ onSearch }) => {
-  const { getGeolocation, data } = useContext(context);
-  const { userLocation } = data;
+  const { getGeolocation, userLocation } = useContext(context);
+  // const { userLocation } = data;
 
   // const displaySearchHandler = () => ;
 
