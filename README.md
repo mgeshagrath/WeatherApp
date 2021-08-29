@@ -1,5 +1,5 @@
 
-<h1 align="center">Weather App (WIP)</h1>
+<h1 align="center">Weather App</h1>
 
 <div align="center">
    Developed with ReactJs and Sass.
@@ -45,7 +45,7 @@
 - [x] Transform temp between °C and °F
 - [x] Light mode and night mode
 - [x] Get user location through button
-- [ ] Error handling
+- [x] Error handling
 - [x] Display next five days
 - [x] Responsive
 
