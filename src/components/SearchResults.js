@@ -7,28 +7,14 @@ const SearchResults = ({ data }) => {
   const { getGeolocation } = useContext(context);
   const { title, latt_long } = data;
 
-  // console.log(latt_long);
-
   const onClickHandler = () => {
     const latlong = latt_long.split(',');
     const [lat, long] = latlong;
-    // const query = {
-      // console.log(latt_long);
-      // console.log(lat,long);
-    //   lat: latlong[0],
-    //   long: latlong[1]
-    // }
     getGeolocation({
       lat,
       long,
     });
   };
-
-  // console.log(geo);
-  // console.log(data);
-
-  // console.log(geo);
-  // console.log(
 
   return (
     <Button className="search__result" onClick={onClickHandler}>

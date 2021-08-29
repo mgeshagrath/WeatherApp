@@ -7,10 +7,6 @@ import './UserCta.scss';
 
 const UserCta = ({ onSearch }) => {
   const { getGeolocation, userLocation } = useContext(context);
-  // const { userLocation } = data;
-
-  // const displaySearchHandler = () => ;
-
   return (
     <Card className="flex user-cta">
       <Button onClick={() => onSearch(displayed => !displayed)} className="user-cta__search-btn">

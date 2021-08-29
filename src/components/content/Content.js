@@ -8,8 +8,6 @@ import './Content.scss';
 
 const Content = () => {
   const { currentWeather, nextWeather, measurement } = useContext(context);
-  // const { currentWeather, nextWeather, measurement } = data;
-
   return (
     <Card className="card content">
       <NavCta />

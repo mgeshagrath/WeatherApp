@@ -8,18 +8,9 @@ export const context = createContext({
   measurement: '°C',
   theme: 'N',
   userLocation: {},
-  // geoError: '',
-  // hasError: {},
-  // isLoading: false,
   getGeolocation: (lat, long) => {},
   getUserWeather: weather => {},
-  // gradesFar: () => {},
-  // gradesCer: () => {},
   toggleMeasurement : () =>{},
   setTheme: () => {},
   setUserLocation: () => {}
-
-  // setGeolocationError: error => {},
-  // setError: errorData => {},
-  // setLoading: loadingData => {},
 });

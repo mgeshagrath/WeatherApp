@@ -6,7 +6,6 @@ import UserCta from './UserCta';
 
 const DayBar = ({onSearch}) => {
   const { location, currentWeather, measurement } = useContext(context);
-  // const { location, currentWeather, measurement } = data;
   const { temp, type, date } = currentWeather;
 
   return (

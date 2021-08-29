@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import { setCssProperty } from '../utility';
 import { context } from './weather-context';
 
@@ -10,14 +10,11 @@ const INITIAL_STATE = {
   measurement: '°C',
   theme: 'N',
   userLocation: {},
-  // isLoading: false,
-  // hasError: false,
-  // allowed: false
 };
 
 const reducer = (state, action) => {
   const { data, type } = action;
-
+console.log('rerender x2');
   if (type === 'GET') {
     return {
       ...state,
@@ -28,30 +25,11 @@ const reducer = (state, action) => {
   }
 
   if (type === 'GEO') {
-    // const { lat, long, error } = data;
-
-    // console.log(data);
     return {
       ...state,
       geo: data,
-      // latlong: { lat, long },
-      // error,
     };
   }
-
-  // if (type === 'F') {
-  //   return {
-  //     ...state,
-  //     measurement: '°F',
-  //   };
-  // }
-
-  // if (type === 'C') {
-  //   return {
-  //     ...state,
-  //     measurement: '°C',
-  //   };
-  // }
 
   if (type === 'MEASU') {
     if (state.measurement === '°C') {
@@ -108,26 +86,6 @@ const reducer = (state, action) => {
       };
     }
   }
-
-  //   return {
-  //     ...state,
-  //     theme: state.theme === 'N' ? 'L' : 'N',
-  //   };
-  // }
-
-  // if (type === 'ERROR') {
-  //   return {
-  //     ...state,
-  //     hasError: { hasError: data.hasError, error: data.error },
-  //   };
-  // }
-
-  // if (type === 'LOADING') {
-  //   return {
-  //     ...state,
-  //     isLoading: !state.isLoading,
-  //   };
-  // }
 };
 
 const WeatherProvider = ({ children }) => {
@@ -135,12 +93,14 @@ const WeatherProvider = ({ children }) => {
   const { geo, location, currentWeather, nextWeather, measurement, theme, userLocation } =
     userWeather;
 
-  const getUserWeatherHandler = (userData, weatherData) => {
+console.log('rerender');
+  const getUserWeatherHandler = useCallback((userData, weatherData) => {
     dispatch({
       type: 'GET',
       data: { userData, weatherData },
     });
-  };
+  }, []);
+
 
   const getGeolocationHandler = geoData => {
     dispatch({
@@ -153,18 +113,6 @@ const WeatherProvider = ({ children }) => {
     dispatch({
       type: 'MEASU',
     });
-
-  // const gradesFarHandler = () => {
-  //   dispatch({
-  //     type: 'F',
-  //   });
-  // };
-
-  // const gradesCerHandler = () => {
-  //   dispatch({
-  //     type: 'C',
-  //   });
-  // };
 
   const setThemeHandler = () =>
     dispatch({
@@ -200,35 +148,6 @@ const WeatherProvider = ({ children }) => {
     );
   }
 
-  // const setGeolocationErrorHandler = error => {
-  //   dispatch({
-  //     type: 'GEOERROR',
-  //     data: error,
-  //   });
-  // };
-
-  // const errorHandler = errorData => {
-  //   dispatch({
-  //     type: 'ERROR',
-  //     data: errorData,
-  //   });
-  // };
-
-  // const loadingHandler = loadingData => {
-  //   dispatch({
-  //     type: 'LOADING',
-  //     data: loadingData,
-  //   });
-  // };
-
-  // navigator.geolocation.getCurrentPosition(position =>
-  //   getGeolocationHandler({
-  //     lat: position.coords.latitude,
-  //     long: position.coords.longitude,
-  //     allowed: true,
-  //   })
-  // );
-
   return (
     <context.Provider
       value={{
@@ -241,13 +160,8 @@ const WeatherProvider = ({ children }) => {
         userLocation,
         getUserWeather: getUserWeatherHandler,
         getGeolocation: getGeolocationHandler,
-        // gradesFar: gradesFarHandler,
-        // gradesCer: gradesCerHandler,
         toggleMeasurement: toggleMeasurementHandler,
         setTheme: setThemeHandler,
-        // setGeolocationError: setGeolocationErrorHandler,
-        // setError: errorHandler,
-        // setLoading: loadingHandler,
       }}
     >
       {children}

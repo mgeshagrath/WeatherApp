@@ -3,91 +3,59 @@ import { context } from './store/weather-context';
 import Content from './components/content/Content';
 import Sidebar from './components/content/Sidebar';
 import Modal from './components/ui/Modal';
-// import './App.scss';
-import SearchBar from './components/SearchBar';
+import { useHttp } from './hooks/useHttp';
+import { PROXY, transformDayData, WEATHER_API } from './utility';
 
 const App = () => {
   const { geo, getUserWeather } = useContext(context);
   const [isLoading, setIsLoading] = useState(false);
-  // const { geo } = data;
-  const { error } = geo;
-
+  const [woeidError, setWoeidError] = useState(null);
+  const { error: locationError, lat, long } = geo;
+  const {
+    dataFetched: latLongData,
+    error: latLongError,
+    loading: latLongLoading,
+  } = useHttp('location/search/?lattlong=', `${lat},${long}`);
 
   useEffect(() => {
     const weatherCall = async () => {
       setIsLoading(true);
       try {
-        const { lat, long } = geo;
-
-        const proxy = 'https://api.allorigins.win/raw?url=';
-
-        if (!lat && !long) return;
-
-        const response = await fetch(
-          `${proxy}https://www.metaweather.com/api/location/search/?lattlong=${lat},${long}`
-        );
-
-        console.log(lat, long);
-
-        if (!response.ok) throw new Error('Error Fetch 1');
-
-        const data = await response.json();
-
-        console.log(data);
-
-        const { woeid } = data[0];
-
-        const newResponse = await fetch(
-          `${proxy}https://www.metaweather.com/api/location/${woeid}/`
-        );
-
-        if (!newResponse.ok) throw new Error('Error fetch 2');
-
+        const { woeid } = latLongData[0];
+        const response = await fetch(`${PROXY}${WEATHER_API}location/${woeid}/`);
+        if (!response.ok) throw new Error();
         const {
           consolidated_weather: weather,
           title: city,
           parent: country,
-        } = await newResponse.json();
+        } = await response.json();
 
-        const weatherData = weather.map(day => {
-          return {
-            windSpeed: Math.round(day.wind_speed * 1.609344),
-            windDirection: Math.floor(day.wind_direction),
-            windDirectionComp: day.wind_direction_compass,
-            humidity: Math.floor(day.humidity),
-            visibility: (day.visibility * 1.609344).toFixed(1),
-            airPressure: Math.floor(day.air_pressure),
-            temp: Math.floor(day.the_temp),
-            maxTemp: Math.floor(day.max_temp),
-            minTemp: Math.floor(day.min_temp),
-            type: day.weather_state_name,
-            date: day.applicable_date,
-          };
-        });
-
+        const weatherData = weather.map(day => transformDayData(day));
         const userData = {
           city,
           country: country.title,
           language: window.navigator.language,
         };
-
         getUserWeather(userData, weatherData);
       } catch (err) {
-        if (err.message === 'Unexpected end of JSON input') return;
+        setWoeidError(true);
       } finally {
         setIsLoading(false);
       }
     };
-    weatherCall();
-  }, [geo]);
 
-  if (isLoading) return <Modal data="Retrieving your data <3" />;
-  if (!isLoading && error) return <Modal data="Please, enable your location :c" />;
+    if (!latLongData) return;
+    weatherCall();
+  }, [geo, latLongData, getUserWeather]);
+
   if (Object.keys(geo).length === 0) return <Modal data="Waiting for your location :)" />;
+  if (isLoading || latLongLoading) return <Modal data="Retrieving your data <3" />;
+  if (!isLoading && !latLongLoading && locationError)
+    return <Modal data="Please, enable your location :c" />;
+  if (latLongError || woeidError) return <Modal data={`Something went wrong, try again!`} />;
 
   return (
     <Fragment>
-    {/* <SearchBar/> */}
       <Sidebar />
       <Content />
     </Fragment>
